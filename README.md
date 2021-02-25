@@ -3,7 +3,7 @@ Some mocking around with Terraform
 
 ## Setup
 
-```console
+```shell
 vivaterra|main⚡ ⇒  brew install tfenv
 vivaterra|main⚡ ⇒  tfenv install
 vivaterra|main⚡ ⇒  tfenv use 0.14.7 # Or whatever version was installed
@@ -38,24 +38,43 @@ Note
     If you are using Pycharm, the Terraform plugin from Jetbrain is a must. 
     Also make sure that you have you credentials install in ./aws/credentials.
     If the profile is not **default**, ``export AWS_PROFILE=mario``
+    When using the plugin, simply type ``Ctrl-SpaceBar`` to bring up the 
+    auto completion. 
 ----
 
-## Creating an S3 bucket
+The Terraform [init](https://www.terraform.io/docs/cli/commands/init.html) initializes 
+a working directory. This means that say, in a single respository, you could have 
+multiple folders, each with independent HCL configuration files (HCL stands for HashiCorp 
+Configuration Language - ``.tf`` extension). This is known as the ``Root Module``. This 
+module normally contains an ``.terraform.lock.hcl`` which contains information about the 
+(cloud) provider.
 
-* [s3.tf](s3.tf)
+A [Terraform Module](https://www.terraform.io/docs/language/modules/index.html) is a collection
+of tf file in a single directory.
 
-```console
-vivaterra|main⚡ ⇒  terraform apply
-...
-aws_s3_bucket.bucket_list: Creating...
-aws_s3_bucket.bucket_list: Creation complete after 4s [id=fakayu-bucket-list]
+Again, before you get started, make sure you AWS client is configured. 
 
-Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
-
+```shell
+    s3|main⚡ ⇒  aws configure                  
+    AWS Access Key ID [****************VOMJ]: 
+    AWS Secret Access Key [****************JMLd]: 
+    Default region name [us-west-2]: 
+    Default output format [yaml-stream]: 
 ```
 
+You also want to set the profile environment variable (e.g. ``export AWS_PROFILE=laurent``)
 
+Each of the sub-directories are Terraform (root) modules. Just follow along
 
+* [s3](s3) [README](s3/README.md) is a super simple module that create a S3 bucket.
+
+# Userful Link
+
+* [Info on Providers](https://www.terraform.io/docs/providers/index.html)
+* [Full List Of Providers](https://registry.terraform.io/browse/providers)
+* [AWS specific](https://registry.terraform.io/providers/hashicorp/aws/latest/docs)
+* [HCL Specific Doc](https://www.terraform.io/docs/language/index.html)
+* [HCL Variables](https://www.terraform.io/docs/language/values/variables.html)
 
 
 
