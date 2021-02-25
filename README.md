@@ -34,12 +34,13 @@ commands will detect it and remind you to do so if necessary.
 ```
 
 ----
-Note
-    If you are using Pycharm, the Terraform plugin from Jetbrain is a must. 
-    Also make sure that you have you credentials install in ./aws/credentials.
-    If the profile is not **default**, ``export AWS_PROFILE=mario``
-    When using the plugin, simply type ``Ctrl-SpaceBar`` to bring up the 
-    auto completion. 
+
+**Note** If you are using Pycharm, the Terraform plugin from Jetbrain is a must. 
+Also make sure that you have you credentials install in ./aws/credentials.
+If the profile is not **default**, ``export AWS_PROFILE=mario``
+When using the plugin, simply type ``Ctrl-SpaceBar`` to bring up the 
+auto completion. 
+
 ----
 
 The Terraform [init](https://www.terraform.io/docs/cli/commands/init.html) initializes 

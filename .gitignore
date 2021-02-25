@@ -30,4 +30,5 @@ override.tf.json
 
 # Pycharm project files
 .idea/
-
+loops/
+with_vars/
