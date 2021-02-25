@@ -67,7 +67,9 @@ You also want to set the profile environment variable (e.g. ``export AWS_PROFILE
 
 Each of the sub-directories are Terraform (root) modules. Just follow along
 
-* [s3](s3) [README](s3/README.md) is a super simple module that create a S3 bucket.
+* [s3](s3) - see [README](s3/README.md) is a super simple module that create a S3 bucket.
+* [module](module) - see [README](module/README.md) illustrates how terraform modules are created and used
+  by other modules, but creating a simple VPC.
 
 # Userful Link
 
