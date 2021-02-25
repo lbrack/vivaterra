@@ -17,7 +17,7 @@ it loads each file in lexical order and merge them together.
   a resource needs to be created in a (cloud) providers, the cloud provider is 
   defined in the next file. 
   
-* [providers.tf][providers.tf] defined the provider(s) for this module. Note that 
+* [providers.tf](providers.tf) defined the provider(s) for this module. Note that 
   you could technically have more than one. 
   [Here is the list of providers](https://registry.terraform.io/browse/providers)
 
