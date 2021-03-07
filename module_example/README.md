@@ -1,12 +1,14 @@
 # Modules
 
-This example shows how to create separate Terraform modules. 
+This example shows how to create separate Terraform modules. In addition to this,
+We load the "project" on 
+[TerraformCLoud](https://app.terraform.io/app/periscopai/workspaces/vivaterra-module-examples/runs)
+This will be covered later. 
 
 The module creates a VPC as well as 2 subnets (one public and one private)
 as illustrated below
 
 ![vpc](vpc.png)
-
 
 As specified earlier, file names can be arbitrary, however by 
 convention people will  name:
@@ -35,12 +37,75 @@ The outputs are stored declared in
 [./modules/vpc_networking/outputs.tf](./modules/vpc_networking/outputs.tf)
 and can be processed as an output. 
 
-## Executing
+## Initializaing the Workspace
 
-As usual
+If you have done so, run Terraform ``login``. This will start a browser
+and have you create an API token which is then stored in 
+``~/.terraform.d/credentials.tfrc.json``
+
+The run init
 
 ```shell
-(testspace):module|main⚡ ⇒  terraform plan                 
+module_example|main⚡ ⇒  terraform init -upgrade
+Upgrading modules...
+- vpc_module in modules/vpc_networking
+
+Initializing the backend...
+
+Initializing provider plugins...
+- Finding hashicorp/aws versions matching "> 3.28.0"...
+- Using previously-installed hashicorp/aws v3.31.0
+...
+```
+
+in [version.tf](versions.tf), you have the 
+[backend configuration](https://www.terraform.io/docs/cloud/run/cli.html#remote-backend-configuration) allowing the 
+connection of this workspace with the cloud.
+
+```terraform
+backend "remote" {
+    hostname      = "app.terraform.io"
+    organization  = "periscopai"
+
+    workspaces {
+      name = "vivaterra-module-examples"
+    }
+  }
+```
+
+From that point on, the Terraform CLI will use the state stored on the 
+cloud rather than the local machine. 
+
+
+## Executing
+
+This time you can run a 
+[remote speculative plan](https://www.terraform.io/docs/cloud/run/cli.html#remote-speculative-plans)
+
+```shell
+(testspace):module_example|main⚡ ⇒  terraform plan
+Running plan in the remote backend. Output will stream here. Pressing Ctrl-C
+will stop streaming the logs, but will not stop the plan running remotely.
+
+Preparing the remote plan...
+
+The remote workspace is configured to work with configuration at
+/module_example relative to the target repository.
+
+Terraform will upload the contents of the following directory,
+excluding files or directories as defined by a .terraformignore file
+at /home/laurent/github/laurent/vivaterra/.terraformignore (if it is present),
+in order to capture the filesystem context the remote workspace expects:
+    /home/laurent/github/laurent/vivaterra
+
+To view this run in a browser, visit:
+https://app.terraform.io/app/periscopai/vivaterra-module-examples/runs/run-ZFT8M742BwoxvXSj
+
+Waiting for the plan to start...
+
+Terraform v0.14.7
+Configuring remote state backend...
+Initializing Terraform configuration...
 
 An execution plan has been generated and is shown below.
 Resource actions are indicated with the following symbols:
@@ -107,17 +172,38 @@ Terraform will perform the following actions:
     }
 
 Plan: 3 to add, 0 to change, 0 to destroy.
-
-------------------------------------------------------------------------
-
-Note: You didn't specify an "-out" parameter to save this plan, so Terraform
-can't guarantee that exactly these actions will be performed if
-"terraform apply" is subsequently run.
-
 ```
-Then
-```shell
-(testspace):module|main⚡ ⇒ terraform apply -auto-approve # to create
-(testspace):module|main⚡ ⇒ terraform destroy -auto-approve # to delete
 
-```
+# Terraform Cloud
+
+In this section, we describe how to setup a workspace in Terraform Cloud and link it 
+to your GitHub repos. Basically, a workspace is a portion of your repos used 
+by Terraform to run IaC modules. The modules (like in this case) can be published 
+directly in the workspace, or it appears to be possible to create reusable 
+modules.
+
+## Creating the Workspace
+
+Once in TerraformCloud, [create the workspace](https://app.terraform.io/app/periscopai/workspaces)
+
+![workspace creation](../docs/images/tfcloud-workspace-creation.png)
+
+once created, you need to setup variables. 
+
+![worksapce created](../docs/images/tfcloud-workspace-created.png)
+
+While you might simply run with the defaults, you must set your AWS Credentials. Those 
+will be write only and are saved as secrets.
+
+Once this is done, you can see/run a plan (as we did above)
+
+![workspace plan](../docs/images/tfcloud-plan.png)
+
+Apply it
+
+![workspace apply](../docs/images/tfcloud-deployment-runs.png)
+
+leading to being it applied
+
+![workspace applied](../docs/images/tfcloud-applied.png)
+

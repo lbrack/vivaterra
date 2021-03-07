@@ -68,8 +68,10 @@ You also want to set the profile environment variable (e.g. ``export AWS_PROFILE
 Each of the sub-directories are Terraform (root) modules. Just follow along
 
 * [s3](s3) - see [README](s3/README.md) is a super simple module that create a S3 bucket.
-* [module](module) - see [README](module/README.md) illustrates how terraform modules are created and used
-  by other modules, but creating a simple VPC.
+* [module_example](module_example) - see [README](module/README.md) illustrates how 
+  terraform modules are created and used by other modules, but creating a simple VPC.
+  In addition to this, the module is linked to 
+  [Terraform Cloud](https://app.terraform.io/app/periscopai/workspaces/vivaterra-module-examples/runs). 
 
 # Userful Link
 
