@@ -1,5 +1,11 @@
 # vivaterra
-Some mocking around with Terraform
+Some mocking around with Terraform. Right now this is a playground for 
+Terraform and Terraform cloud and a place where I capture my experiments. 
+
+Feel free to add your own or follow along. 
+
+I also want to use the [GitHib Discussions](https://github.com/periscopai/vivaterra/discussions)
+as much as possible.
 
 ## Setup
 
