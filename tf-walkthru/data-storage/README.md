@@ -3,6 +3,8 @@
 This tutorial shows how to create s3 buckets and dynamo DB file as 
 well as upload objects into that bucket.
 
+Currently the implementation is defined in [main.tf](main.tf)
+
 # Reference
 
 [Data Storage on AWS with Terraform: S3 and Dynamo DB](https://www.packtpub.com/product/learn-terraform-for-cloud-infrastructures-video/9781838982959)

@@ -27,6 +27,10 @@ resource "aws_s3_bucket" "my_bucket" {
     type = "LOG"
     tier = "STANDARDS"
   }
+  versioning {
+    enabled = true
+    mfa_delete = false
+  }
 }
 
 resource "aws_s3_bucket_object" "readme_file" {
