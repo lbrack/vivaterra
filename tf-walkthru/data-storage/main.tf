@@ -37,4 +37,7 @@ resource "aws_s3_bucket_object" "readme_file" {
   bucket = aws_s3_bucket.my_bucket.bucket
   key    = "files/README.md"
   source = "README.md"
+  // This forces terraform to compute the MD5 on the file to
+  // update versioning
+  etag = filemd5("README.md")
 }
