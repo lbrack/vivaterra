@@ -31,4 +31,4 @@ override.tf.json
 # Pycharm project files
 .idea/
 old/
-
+.terraform.lock.hcl

@@ -24,7 +24,13 @@ resource "aws_s3_bucket" "my_bucket" {
 
   //region = "us-west-2"
   tags = {
-    type="LOG"
-    tier="STANDARDS"
+    type = "LOG"
+    tier = "STANDARDS"
   }
+}
+
+resource "aws_s3_bucket_object" "readme_file" {
+  bucket = aws_s3_bucket.my_bucket.bucket
+  key    = "files/README.md"
+  source = "README.md"
 }
