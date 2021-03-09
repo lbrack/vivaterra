@@ -13,6 +13,8 @@ data "aws_caller_identity" "my_account" {
 resource "aws_s3_bucket" "my_bucket" {
   bucket = "vivaterra-tutorial-${data.aws_caller_identity.my_account.account_id}"
 
+  acl = "public-read"
+
   // As of AWS Provider v3, the bucket region has to match the provider region (above)
   // thus commenting out the setting below will result in the following error
   //Error: Computed attributes cannot be set
