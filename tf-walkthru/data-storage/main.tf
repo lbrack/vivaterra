@@ -28,8 +28,28 @@ resource "aws_s3_bucket" "my_bucket" {
     tier = "STANDARDS"
   }
   versioning {
-    enabled = true
+    enabled    = true
     mfa_delete = false
+  }
+  // The following defines the lifecyle of all the files under files/
+  // After 30 days, they go to standard Infrequent Access
+  // After 60 days, they go to Glacier
+  // After 90 days, they are deleted
+  lifecycle_rule {
+    prefix  = "files/"
+    enabled = true
+
+    noncurrent_version_transition {
+      storage_class = "STANDARD_IA"
+      days          = 30
+    }
+    noncurrent_version_transition {
+      days          = 60
+      storage_class = "GLACIER"
+    }
+    noncurrent_version_expiration {
+      days = 90
+    }
   }
 }
 
