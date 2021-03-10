@@ -57,26 +57,26 @@ resource "aws_s3_bucket" "my_bucket" {
 
 resource "aws_s3_bucket_policy" "my_bucket_policy" {
   bucket = aws_s3_bucket.my_bucket.id
-  policy = file("bucket_policy.json") // Defining the bucket policy in a file.
+  // policy = file("bucket_policy.json") // Defining the bucket policy in a file.
   // heredoc formatting
-  //  policy = <<POLICY
-  //{
-  //  "Version": "2012-10-17",
-  //  "Id": "MyBucketPolicy",
-  //  "Statement": [
-  //    {
-  //      "Sid": "IPAllow",
-  //      "Effect": "Deny",
-  //      "Principal": "*",
-  //      "Action": "s3:*",
-  //      "Resource": "arn:aws:s3:::${aws_s3_bucket.my_bucket.bucket}/*",
-  //      "condition": {
-  //        "IpAddress": {"aws:SourceIP": "4.4.4.4/32"}
-  //      }
-  //    }
-  //  ]
-  //}
-  //POLICY
+  policy = <<POLICY
+  {
+    "Version": "2012-10-17",
+    "Id": "MyBucketPolicy",
+    "Statement": [
+      {
+        "Sid": "IPAllow",
+        "Effect": "Deny",
+        "Principal": "*",
+        "Action": "s3:*",
+        "Resource": "arn:aws:s3:::${aws_s3_bucket.my_bucket.bucket}/*",
+        "condition": {
+          "IpAddress": {"aws:SourceIP": "4.4.4.4/32"}
+        }
+      }
+    ]
+  }
+  POLICY
 }
 
 resource "aws_s3_bucket_object" "readme_file" {
