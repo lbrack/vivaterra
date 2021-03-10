@@ -1,0 +1,16 @@
+{
+  "Version": "2012-10-17",
+  "Id": "MyBucketPolicy",
+  "Statement": [
+    {
+      "Sid": "IPAllow",
+      "Effect": "Deny",
+      "Principal": "*",
+      "Action": "s3:*",
+      "Resource": "arn:aws:s3:::${aws_s3_bucket.my_bucket.bucket}/*",
+      "condition": {
+        "IpAddress": {"aws:SourceIP": "4.4.4.4/32"}
+      }
+    }
+  ]
+}
