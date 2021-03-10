@@ -8,8 +8,8 @@
       "Principal": "*",
       "Action": "s3:*",
       "Resource": "arn:aws:s3:::${aws_s3_bucket.my_bucket.bucket}/*",
-      "condition": {
-        "IpAddress": {"aws:SourceIP": "4.4.4.4/32"}
+      "Condition": {
+        "IpAddress": {"aws:SourceIp": "4.4.4.4/32"}
       }
     }
   ]
