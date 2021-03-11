@@ -80,6 +80,8 @@ Each of the sub-directories are Terraform (root) modules. Just follow along
   [Terraform Cloud](https://app.terraform.io/app/periscopai/workspaces/vivaterra-module-examples/runs).
 * [data-storage](tf-walkthru/data-storage) - The [README](tf-walkthru/data-storage/README.md) explain
   how data persistence is done via S3 bucket or Dynamo DB
+* [vpc-networking](tf-walkthru/vpc-networking) - The [README](tf-walkthru/vpc-networking/README.md) 
+  illustrates how a VPC is created.
 
 # Userful Link
 
